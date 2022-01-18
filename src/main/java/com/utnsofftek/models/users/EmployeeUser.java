@@ -5,8 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 @Entity
-@DiscriminatorValue("admin")
-@Table(name="user_admin")
-public class Admin extends Usuario{
+@DiscriminatorValue("employee")
+@Table(name="user_employee")
+public class EmployeeUser extends Usuario{
 	
 }

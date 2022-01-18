@@ -1,4 +1,4 @@
-package com.utnsofftek.models;
+	package com.utnsofftek.models;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +23,12 @@ public class Proveedor extends PersistentEntity{
 	private String nombre;
 	@OneToMany(mappedBy = "proveedor", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<Producto> listaProductos;
+	@Column
+	public String direccion;
+	@Column
+	int cuit;
+	
+	//TODO FALTA RAZON Categoría
 	
 	public void agregarProducto(Producto ... producto) {
 		
