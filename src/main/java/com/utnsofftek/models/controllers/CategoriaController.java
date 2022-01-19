@@ -19,11 +19,8 @@ public class CategoriaController {
 	@PostMapping("/categoria")
 	public boolean agregarCategoria(@RequestBody Categoria categoria) {
 		try {
-			catDAO.agregarCategoria(categoria);
 			return true;
-		} catch (Exception e) {
-			System.out.println(e);
-			catDAO.getEm().getTransaction().rollback();
+		} catch (Exception e) {	
 			return false;		
 		}
 	}

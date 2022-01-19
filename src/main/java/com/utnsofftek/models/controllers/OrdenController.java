@@ -31,7 +31,6 @@ public class OrdenController {
 			return true;
 		} catch (Exception e) {
 			System.out.println(e);
-			oDAO.getEm().getTransaction().rollback();
 			return false;
 		}
 	}

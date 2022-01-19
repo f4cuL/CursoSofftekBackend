@@ -10,10 +10,9 @@ import lombok.Setter;
 @Getter
 @Setter
 public class HibernateEM {
-	private EntityManager em;
+	private EntityManagerFactory emf;
 	public HibernateEM() {
-		EntityManagerFactory emf= Persistence.createEntityManagerFactory("db");
-		this.em = emf.createEntityManager();
+		this.emf = Persistence.createEntityManagerFactory("db");
 	}
 	
 }

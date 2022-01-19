@@ -39,7 +39,6 @@ public class ProveedorController{
 			}
 		} catch (Exception e) {
 			System.out.println(e);
-			provDAO.getEm().getTransaction().rollback();
 			return false;
 		}
 		return false;
@@ -51,7 +50,7 @@ public class ProveedorController{
 			provDAO.eliminarProveedor(id);
 			return true;
 		} catch (Exception e) {
-			provDAO.getEm().getTransaction().rollback();
+			System.out.println(e);
 			return false;
 		}
 	}
@@ -61,7 +60,7 @@ public class ProveedorController{
 			provDAO.editarProveedor(p,id);
 			return true;
 		} catch (Exception e) {
-			provDAO.getEm().getTransaction().rollback();
+			System.out.println(e);
 			return false;
 		}
 	}

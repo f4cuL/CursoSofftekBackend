@@ -29,23 +29,18 @@ public class ProductoController {
 			pDAO.modificarProducto(id, p);
 			return true;
 		} catch (Exception e) {
-			System.out.println(e);
-			pDAO.getEm().getTransaction().rollback();
 			return false;
 		}
 	}
 	@PostMapping("/producto")
-	public boolean insertarProducto(@RequestBody Producto p)
+	public boolean insertarProducto(@RequestParam("id")int idProveedor,@RequestBody Producto p)
 	{
 		try {
-			pDAO.agregarProducto(p);
+			pDAO.agregarProducto(idProveedor, p);
 			return true;
 		} catch (Exception e) {
-			System.out.println(e);
-			pDAO.getEm().getTransaction().rollback();
 			return false;
 		}
-		
 	}
 	@DeleteMapping("/producto")
 	public boolean borrarProducto(@RequestParam("id") int id) {
@@ -53,8 +48,6 @@ public class ProductoController {
 			pDAO.borrarProducto(id);
 			return true;
 		} catch (Exception e) {
-			System.out.println(e);
-			pDAO.getEm().getTransaction().rollback();
 			return false;
 		}
 	

@@ -12,9 +12,19 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.transaction.Transactional;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
+@Getter
+@Setter
 @Table(name = "proovedor")
+@Transactional
 public class Proveedor extends PersistentEntity{
 	
 	public Proveedor() {
@@ -23,19 +33,22 @@ public class Proveedor extends PersistentEntity{
 
 	@Column
 	private String nombre;
-	@OneToMany(mappedBy = "proveedor", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JsonManagedReference
+	@OneToMany(mappedBy = "proveedor", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private List<Producto> listaProductos;
 	@Column(nullable = false)
 	private String direccion;
 	@Column(nullable = false)
 	private int cuit;
-
+	@JsonIgnore
 	@ManyToMany(cascade = { CascadeType.ALL })
 	@JoinTable(
 			name = "proveedor_categoria", joinColumns = {
 			@JoinColumn(name = "id_proveedor") },
 			inverseJoinColumns = { @JoinColumn(name = "id_categoria") })
 	private List<Categoria> listaCategorias;
+	
+	//TODO POJO categorias y cliente para orden - cliente
 	
 	public void agregarProducto(Producto ... producto) {
 		for (Producto p : producto) {
@@ -48,36 +61,8 @@ public class Proveedor extends PersistentEntity{
 			listaCategorias.add(c);
 		}
 	}
+	public Proveedor(List<Producto> listaProductos) {
+		this.listaProductos = new ArrayList<>();
+	}
 	
-	public List<Categoria> getListaCategorias() {
-		return listaCategorias;
-	}
-
-	public void setListaCategorias(List<Categoria> listaCategorias) {
-		this.listaCategorias = listaCategorias;
-	}
-
-	public String getDireccion() {
-		return direccion;
-	}
-
-	public void setDireccion(String direccion) {
-		this.direccion = direccion;
-	}
-
-	public int getCuit() {
-		return cuit;
-	}
-
-	public void setCuit(int cuit) {
-		this.cuit = cuit;
-	}
-
-	public String getNombre() {
-		return nombre;
-	}
-
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
 }
