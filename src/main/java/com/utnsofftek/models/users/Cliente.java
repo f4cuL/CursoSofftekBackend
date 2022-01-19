@@ -9,14 +9,14 @@ import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.utnsofftek.models.Orden;
+import com.utnsofftek.models.Producto;
 import com.utnsofftek.models.enumerators.TipoCliente;
-
-import lombok.Getter;
-import lombok.Setter;
 
 @Entity
 @DiscriminatorValue("cliente")
@@ -33,8 +33,16 @@ public class Cliente extends Usuario{
 	@Enumerated(EnumType.STRING)
 	@Column(name="tipo_cliente")
 	public TipoCliente tipoCliente;
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "cliente")
+	@JsonManagedReference
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "cliente", fetch = FetchType.EAGER)
 	List<Orden> listaOrdenes;
+
+	public void agregarOrden(Orden ... orden) {
+		for (Orden o : orden) {
+			o.setCliente(this);
+			listaOrdenes.add(o);
+		}
+	}
 	
 	public Cliente() {
 		this.listaOrdenes=new ArrayList<Orden>();
@@ -70,6 +78,15 @@ public class Cliente extends Usuario{
 	public void setTipoCliente(TipoCliente tipoCliente) {
 		this.tipoCliente = tipoCliente;
 	}
+
+	public List<Orden> getListaOrdenes() {
+		return listaOrdenes;
+	}
+
+	public void setListaOrdenes(List<Orden> listaOrdenes) {
+		this.listaOrdenes = listaOrdenes;
+	}
+	
 	
 	
 }

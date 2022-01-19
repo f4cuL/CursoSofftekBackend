@@ -36,12 +36,16 @@ public class Proveedor extends PersistentEntity{
 			@JoinColumn(name = "id_proveedor") },
 			inverseJoinColumns = { @JoinColumn(name = "id_categoria") })
 	private List<Categoria> listaCategorias;
-	  
+	
 	public void agregarProducto(Producto ... producto) {
-		
 		for (Producto p : producto) {
 			p.setProveedor(this);
 			listaProductos.add(p);
+		}
+	}
+	public void agregarCategoria(Categoria ... categoria) {
+		for (Categoria c : categoria) {
+			listaCategorias.add(c);
 		}
 	}
 	
