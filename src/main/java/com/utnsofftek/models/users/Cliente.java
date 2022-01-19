@@ -1,5 +1,6 @@
 package com.utnsofftek.models.users;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -34,6 +35,11 @@ public class Cliente extends Usuario{
 	public TipoCliente tipoCliente;
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "cliente")
 	List<Orden> listaOrdenes;
+	
+	public Cliente() {
+		this.listaOrdenes=new ArrayList<Orden>();
+	}
+	
 	public String getNombre() {
 		return nombre;
 	}

@@ -7,6 +7,9 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -26,16 +29,28 @@ public class Proveedor extends PersistentEntity{
 	private String direccion;
 	@Column(nullable = false)
 	private int cuit;
-	
-	//TODO FALTA RAZON Categoría 
-	
+
+	@ManyToMany(cascade = { CascadeType.ALL })
+	@JoinTable(
+			name = "proveedor_categoria", joinColumns = {
+			@JoinColumn(name = "id_proveedor") },
+			inverseJoinColumns = { @JoinColumn(name = "id_categoria") })
+	private List<Categoria> listaCategorias;
+	  
 	public void agregarProducto(Producto ... producto) {
 		
 		for (Producto p : producto) {
 			p.setProveedor(this);
 			listaProductos.add(p);
 		}
+	}
+	
+	public List<Categoria> getListaCategorias() {
+		return listaCategorias;
+	}
 
+	public void setListaCategorias(List<Categoria> listaCategorias) {
+		this.listaCategorias = listaCategorias;
 	}
 
 	public String getDireccion() {

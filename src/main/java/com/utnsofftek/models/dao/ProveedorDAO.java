@@ -13,6 +13,7 @@ public class ProveedorDAO extends HibernateEM {
 	@SuppressWarnings("unchecked")
 	public List<Proveedor> findAll() {
 		return getEm().createQuery("FROM Proveedor").getResultList();
+
 	}
 
 	public Proveedor findById(int id) {
@@ -41,4 +42,4 @@ public class ProveedorDAO extends HibernateEM {
 		getEm().getTransaction().commit();
 		
 	}
-}//TODO ABM
+}
