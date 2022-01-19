@@ -7,6 +7,7 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -22,13 +23,13 @@ public class ProveedorController{
 	@Autowired
 	ProveedorDAO provDAO;
 
-	@GetMapping("/proveedores")
+	@GetMapping("/proveedor")
 	public List<Proveedor> traerProveedores() {
 		return provDAO.findAll();
 	}
 
-	@GetMapping("/proveedor")
-	public Proveedor traerProveedor(@RequestParam int id) {
+	@GetMapping("/proveedor/{id}")
+	public Proveedor traerProveedor(@PathVariable int id) {
 		return provDAO.findById(id);
 	}
 
@@ -46,8 +47,8 @@ public class ProveedorController{
 		return false;
 	}
 
-	@DeleteMapping("/proveedor")
-	public boolean eliminarProveedor(@RequestParam int id) {
+	@DeleteMapping("/proveedor/{id}")
+	public boolean eliminarProveedor(@PathVariable int id) {
 		try {
 			provDAO.eliminar(id);
 			return true;
@@ -56,8 +57,8 @@ public class ProveedorController{
 			return false;
 		}
 	}
-	@PutMapping("/proveedor")
-	public boolean modificarProveedor(@RequestBody Proveedor p, @RequestParam int id) {
+	@PutMapping("/proveedor/{id}")
+	public boolean modificarProveedor(@RequestBody Proveedor p, @PathVariable int id) {
 		try {
 			provDAO.editar(p,id);
 			return true;

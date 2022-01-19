@@ -39,7 +39,6 @@ public class ProveedorDAO extends HibernateEM implements DaoInterface<Proveedor>
 		}
 		
 	}
-
 	public void agregar(Proveedor p) {
 		EntityManager em = this.getEmf().createEntityManager();
 		try {
@@ -51,12 +50,11 @@ public class ProveedorDAO extends HibernateEM implements DaoInterface<Proveedor>
 		}
 
 	}
-
 	public void eliminar(int id) {
 		EntityManager em = this.getEmf().createEntityManager();
 		try{
 			em.getTransaction().begin();
-			em.remove(findById(id));
+			em.remove(em.find(Proveedor.class, id));
 			em.getTransaction().commit();
 		}finally{
 			em.close();
@@ -77,6 +75,6 @@ public class ProveedorDAO extends HibernateEM implements DaoInterface<Proveedor>
 			em.close();
 		}
 	}
-
+	//TODO Agregar categorias
 	
 }

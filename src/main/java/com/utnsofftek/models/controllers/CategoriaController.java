@@ -24,7 +24,7 @@ public class CategoriaController {
 			return false;		
 		}
 	}
-	@GetMapping("/categorias")
+	@GetMapping("/categoria")
 	public List<Categoria> traerCategorias(){
 		return catDAO.findALL();
 	}

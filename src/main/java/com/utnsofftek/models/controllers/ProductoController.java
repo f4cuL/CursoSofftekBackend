@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,13 +18,13 @@ import com.utnsofftek.models.dao.ProductoDAO;
 public class ProductoController {
 	@Autowired
 	ProductoDAO pDAO;
-	@GetMapping("/producto")
-	public Producto traerProducto(@RequestParam("id") int id)
+	@GetMapping("/producto/{id}")
+	public Producto traerProducto(@PathVariable int id)
 	{
 		return pDAO.findById(id);	
 	}
-	@PutMapping("/producto")
-	public boolean modificarProducto(@RequestParam("id") int id, @RequestBody Producto p)
+	@PutMapping("/producto/{id}")
+	public boolean modificarProducto(@PathVariable int id, @RequestBody Producto p)
 	{
 		try {
 			pDAO.modificarProducto(id, p);
@@ -32,8 +33,8 @@ public class ProductoController {
 			return false;
 		}
 	}
-	@PostMapping("/producto")
-	public boolean insertarProducto(@RequestParam("id")int idProveedor,@RequestBody Producto p)
+	@PostMapping("/proveedor/{id}/producto")
+	public boolean insertarProducto(@PathVariable("id")int idProveedor,@RequestBody Producto p)
 	{
 		try {
 			pDAO.agregarProducto(idProveedor, p);
@@ -42,8 +43,8 @@ public class ProductoController {
 			return false;
 		}
 	}
-	@DeleteMapping("/producto")
-	public boolean borrarProducto(@RequestParam("id") int id) {
+	@DeleteMapping("/producto/{id}")
+	public boolean borrarProducto(@PathVariable("id") int id) {
 		try {
 			pDAO.borrarProducto(id);
 			return true;
