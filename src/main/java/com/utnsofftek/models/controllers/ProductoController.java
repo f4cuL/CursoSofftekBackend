@@ -1,4 +1,4 @@
-package com.utnsofftek.controllers;
+package com.utnsofftek.models.controllers;
 
 import java.util.List;
 
@@ -23,18 +23,41 @@ public class ProductoController {
 		return pDAO.findById(id);	
 	}
 	@PutMapping("/producto")
-	public void modificarProducto(@RequestParam("id") int id, @RequestBody Producto p)
+	public boolean modificarProducto(@RequestParam("id") int id, @RequestBody Producto p)
 	{
-		pDAO.modificarProducto(id, p);
+		try {
+			pDAO.modificarProducto(id, p);
+			return true;
+		} catch (Exception e) {
+			System.out.println(e);
+			pDAO.getEm().getTransaction().rollback();
+			return false;
+		}
 	}
 	@PostMapping("/producto")
-	public void insertarProducto(@RequestBody Producto p)
+	public boolean insertarProducto(@RequestBody Producto p)
 	{
-		pDAO.agregarProducto(p);
+		try {
+			pDAO.agregarProducto(p);
+			return true;
+		} catch (Exception e) {
+			System.out.println(e);
+			pDAO.getEm().getTransaction().rollback();
+			return false;
+		}
+		
 	}
 	@DeleteMapping("/producto")
-	public void borrarProducto(@RequestParam("id") int id) {
-		pDAO.borrarProducto(id);
+	public boolean borrarProducto(@RequestParam("id") int id) {
+		try {
+			pDAO.borrarProducto(id);
+			return true;
+		} catch (Exception e) {
+			System.out.println(e);
+			pDAO.getEm().getTransaction().rollback();
+			return false;
+		}
+	
 	}
 	@GetMapping("/productos")
 	public List<Producto> traerProductos()

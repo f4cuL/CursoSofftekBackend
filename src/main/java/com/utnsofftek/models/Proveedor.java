@@ -12,7 +12,6 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "proovedor")
-
 public class Proveedor extends PersistentEntity{
 	
 	public Proveedor() {
@@ -23,12 +22,12 @@ public class Proveedor extends PersistentEntity{
 	private String nombre;
 	@OneToMany(mappedBy = "proveedor", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<Producto> listaProductos;
-	@Column
-	public String direccion;
-	@Column
-	int cuit;
+	@Column(nullable = false)
+	private String direccion;
+	@Column(nullable = false)
+	private int cuit;
 	
-	//TODO FALTA RAZON Categoría
+	//TODO FALTA RAZON Categoría 
 	
 	public void agregarProducto(Producto ... producto) {
 		
@@ -36,8 +35,23 @@ public class Proveedor extends PersistentEntity{
 			p.setProveedor(this);
 			listaProductos.add(p);
 		}
-		
 
+	}
+
+	public String getDireccion() {
+		return direccion;
+	}
+
+	public void setDireccion(String direccion) {
+		this.direccion = direccion;
+	}
+
+	public int getCuit() {
+		return cuit;
+	}
+
+	public void setCuit(int cuit) {
+		this.cuit = cuit;
 	}
 
 	public String getNombre() {

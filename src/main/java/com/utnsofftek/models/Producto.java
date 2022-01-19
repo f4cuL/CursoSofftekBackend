@@ -20,7 +20,7 @@ public class Producto extends PersistentEntity{
 	@Column(name="nombre_producto")
 	private String nombreProducto;
 	@Column(name="precio_producto")
-	private int precioProducto;
+	private double precioProducto;
 	@Column
 	private int stock;
 }

@@ -5,21 +5,21 @@ import java.util.List;
 import org.springframework.stereotype.Component;
 
 import com.utnsofftek.models.HibernateEM;
-import com.utnsofftek.models.users.NormalUser;
+import com.utnsofftek.models.users.Cliente;
+
 @Component
-public class NormalUserDAO extends HibernateEM{
+public class ClienteDAO extends HibernateEM {
 
 	@SuppressWarnings("unchecked")
-	public List<NormalUser> findAllNormalUsers(){
-		return getEm().createQuery("FROM NormalUser").getResultList();
+	public List<Cliente> findAllClientes() {
+		return getEm().createQuery("FROM Cliente").getResultList();
 	}
-	public void generarUsuario(NormalUser u) {
+
+	public void generarUsuario(Cliente u) {
 		getEm().getTransaction().begin();
 		getEm().persist(u);
 		getEm().getTransaction().commit();
 	}
-	
-	public static void main(String[] args) {
-		
-	}
+
 }
+//TODO ABM

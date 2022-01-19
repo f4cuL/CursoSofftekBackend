@@ -10,22 +10,29 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.password4j.Hash;
 import com.password4j.Password;
-import com.utnsofftek.models.users.NormalUser;
-import com.utnsofftek.models.users.dao.NormalUserDAO;
+import com.utnsofftek.models.users.Cliente;
+import com.utnsofftek.models.users.dao.ClienteDAO;
 
 @RestController
-public class NormalUserController {
+public class ClienteController {
 	@Autowired
-	NormalUserDAO nUDAO;
-	@GetMapping("/usuarios")
-	public List<NormalUser> findAllUsers(){
-		return nUDAO.findAllNormalUsers();
+	ClienteDAO cliDAO;
+	@GetMapping("/usuario/clientes")
+	public List<Cliente> findAllUsers(){
+		return cliDAO.findAllClientes();
 	}
-	@PostMapping("/usuario")
-	public void agregarUsuario(@RequestBody NormalUser u) {
+	@PostMapping("/usuario/cliente")
+	public boolean agregarUsuario(@RequestBody Cliente u) {
 		Hash hash = Password.hash(u.getPassword()).withBCrypt();
 		u.setPassword(hash.getResult());
-		nUDAO.generarUsuario(u);
+		try {
+			cliDAO.generarUsuario(u);
+			return true;
+		} catch (Exception e) {
+			System.out.println(e);
+			cliDAO.getEm().getTransaction().rollback();
+			return false;
+		}
 	}
 	
 }

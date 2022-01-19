@@ -19,8 +19,8 @@ import lombok.Setter;
 @DiscriminatorColumn(name = "type")
 @Table(name="user")
 public class Usuario extends PersistentEntity{
-	@Column(name="nombre_usuario")
+	@Column(name="nombre_usuario", nullable = false)
 	private String nombreUsuario;
-	@Column(name="password")
+	@Column(name="password", nullable = false)
 	private String password;
 }

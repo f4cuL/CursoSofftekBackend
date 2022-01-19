@@ -15,9 +15,9 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@DiscriminatorValue("normal")
-@Table(name="user_normal")
-public class NormalUser extends Usuario{
+@DiscriminatorValue("cliente")
+@Table(name="user_cliente")
+public class Cliente extends Usuario{
 	@Column
 	public String nombre;
 	@Column

@@ -1,4 +1,4 @@
-package com.utnsofftek.controllers;
+package com.utnsofftek.models.controllers;
 
 import java.util.List;
 
@@ -20,23 +20,39 @@ public class ProveedorController{
 	ProveedorDAO provDAO;
 
 	@GetMapping("/proveedores")
-	public List<Proveedor> findAll() {
+	public List<Proveedor> traerProveedores() {
 		return provDAO.findAll();
 	}
 
 	@GetMapping("/proveedor")
-	public Proveedor findbyId(@RequestParam int id) {
+	public Proveedor traerProveedor(@RequestParam int id) {
 		return provDAO.findById(id);
 	}
 
 	@PostMapping("/proveedor")
-	public void agregarProveedor(@RequestBody Proveedor p) {
-		provDAO.agregarProveedor(p);
+	public boolean agregarProveedor(@RequestBody Proveedor p) {
+		try {
+			if(p.getCuit()!=0) {
+			provDAO.agregarProveedor(p);
+			return true;
+			}
+		} catch (Exception e) {
+			System.out.println(e);
+			provDAO.getEm().getTransaction().rollback();
+			return false;
+		}
+		return false;
 	}
 
 	@DeleteMapping("/proveedor")
-	public void eliminarProveedor(@RequestParam int id) {
-		provDAO.eliminarProveedor(id);
+	public boolean eliminarProveedor(@RequestParam int id) {
+		try {
+			provDAO.eliminarProveedor(id);
+			return true;
+		} catch (Exception e) {
+			provDAO.getEm().getTransaction().rollback();
+			return false;
+		}
 	}
 
 }

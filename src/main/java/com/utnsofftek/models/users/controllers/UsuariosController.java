@@ -1,5 +1,5 @@
 package com.utnsofftek.models.users.controllers;
 
-public class UsuarioController {
+public class UsuariosController {
 //TODO para el admin
 }
