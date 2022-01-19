@@ -1,7 +1,9 @@
 	package com.utnsofftek.models;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -28,27 +30,24 @@ import lombok.Setter;
 public class Proveedor extends PersistentEntity{
 	
 	public Proveedor() {
-		this.listaProductos = new ArrayList<Producto>();
+		this.listaProductos =new HashSet<>();
 	}
 
 	@Column
 	private String nombre;
 	@JsonManagedReference
 	@OneToMany(mappedBy = "proveedor", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	private List<Producto> listaProductos;
+	private Set<Producto> listaProductos;
 	@Column(nullable = false)
 	private String direccion;
 	@Column(nullable = false)
 	private int cuit;
-	@JsonIgnore
-	@ManyToMany(cascade = { CascadeType.ALL })
+	@ManyToMany(cascade = { CascadeType.ALL }, fetch = FetchType.EAGER)
 	@JoinTable(
 			name = "proveedor_categoria", joinColumns = {
 			@JoinColumn(name = "id_proveedor") },
 			inverseJoinColumns = { @JoinColumn(name = "id_categoria") })
-	private List<Categoria> listaCategorias;
-	
-	//TODO POJO categorias y cliente para orden - cliente
+	private Set<Categoria> listaCategorias;
 	
 	public void agregarProducto(Producto ... producto) {
 		for (Producto p : producto) {
@@ -60,9 +59,6 @@ public class Proveedor extends PersistentEntity{
 		for (Categoria c : categoria) {
 			listaCategorias.add(c);
 		}
-	}
-	public Proveedor(List<Producto> listaProductos) {
-		this.listaProductos = new ArrayList<>();
 	}
 	
 }
