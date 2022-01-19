@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -48,6 +49,16 @@ public class ProveedorController{
 	public boolean eliminarProveedor(@RequestParam int id) {
 		try {
 			provDAO.eliminarProveedor(id);
+			return true;
+		} catch (Exception e) {
+			provDAO.getEm().getTransaction().rollback();
+			return false;
+		}
+	}
+	@PutMapping("/proveedor")
+	public boolean modificarProveedor(@RequestBody Proveedor p, @RequestParam int id) {
+		try {
+			provDAO.editarProveedor(p,id);
 			return true;
 		} catch (Exception e) {
 			provDAO.getEm().getTransaction().rollback();
