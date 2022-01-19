@@ -36,7 +36,7 @@ public class ProveedorController{
 	public boolean agregarProveedor(@RequestBody Proveedor p) {
 		try {
 			if(p.getCuit()!=0) {
-			provDAO.agregarProveedor(p);
+			provDAO.agregar(p);
 			return true;
 			}
 		} catch (Exception e) {
@@ -49,7 +49,7 @@ public class ProveedorController{
 	@DeleteMapping("/proveedor")
 	public boolean eliminarProveedor(@RequestParam int id) {
 		try {
-			provDAO.eliminarProveedor(id);
+			provDAO.eliminar(id);
 			return true;
 		} catch (Exception e) {
 			System.out.println(e);
@@ -59,7 +59,7 @@ public class ProveedorController{
 	@PutMapping("/proveedor")
 	public boolean modificarProveedor(@RequestBody Proveedor p, @RequestParam int id) {
 		try {
-			provDAO.editarProveedor(p,id);
+			provDAO.editar(p,id);
 			return true;
 		} catch (Exception e) {
 			System.out.println(e);

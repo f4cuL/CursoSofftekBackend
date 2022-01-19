@@ -5,6 +5,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
 
+import org.hibernate.Hibernate;
 import org.springframework.stereotype.Component;
 
 import com.utnsofftek.models.HibernateEM;

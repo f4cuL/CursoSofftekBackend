@@ -36,13 +36,13 @@ public class Proveedor extends PersistentEntity{
 	@Column
 	private String nombre;
 	@JsonManagedReference
-	@OneToMany(mappedBy = "proveedor", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "proveedor", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private Set<Producto> listaProductos;
 	@Column(nullable = false)
 	private String direccion;
 	@Column(nullable = false)
 	private int cuit;
-	@ManyToMany(cascade = { CascadeType.ALL }, fetch = FetchType.EAGER)
+	@ManyToMany(cascade = { CascadeType.ALL }, fetch = FetchType.LAZY)
 	@JoinTable(
 			name = "proveedor_categoria", joinColumns = {
 			@JoinColumn(name = "id_proveedor") },

@@ -4,19 +4,24 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 
+import org.hibernate.Hibernate;
 import org.springframework.stereotype.Component;
 
 import com.utnsofftek.models.HibernateEM;
-import com.utnsofftek.models.Producto;
 import com.utnsofftek.models.Proveedor;
 
 @Component
-public class ProveedorDAO extends HibernateEM {
+public class ProveedorDAO extends HibernateEM implements DaoInterface<Proveedor>{
 	@SuppressWarnings("unchecked")
 	public List<Proveedor> findAll() {
 		EntityManager em = this.getEmf().createEntityManager();
 		try {
-			return em.createQuery("FROM Proveedor").getResultList();
+			List<Proveedor> listaObtenida = em.createQuery("FROM Proveedor").getResultList();
+			for (Proveedor p : listaObtenida) {
+				Hibernate.initialize(p.getListaCategorias());
+				Hibernate.initialize(p.getListaProductos());
+			}
+			return listaObtenida;
 		} finally {
 			em.close();
 		}
@@ -25,14 +30,17 @@ public class ProveedorDAO extends HibernateEM {
 	public Proveedor findById(int id) {
 		EntityManager em = this.getEmf().createEntityManager();
 		try {
-			return em.find(Proveedor.class, id);
+			Proveedor p = em.find(Proveedor.class, id);
+			Hibernate.initialize(p.getListaProductos());
+			Hibernate.initialize(p.getListaCategorias());
+			return p;
 		}finally {
 			em.close();
 		}
 		
 	}
 
-	public void agregarProveedor(Proveedor p) {
+	public void agregar(Proveedor p) {
 		EntityManager em = this.getEmf().createEntityManager();
 		try {
 			em.getTransaction().begin();
@@ -44,7 +52,7 @@ public class ProveedorDAO extends HibernateEM {
 
 	}
 
-	public void eliminarProveedor(int id) {
+	public void eliminar(int id) {
 		EntityManager em = this.getEmf().createEntityManager();
 		try{
 			em.getTransaction().begin();
@@ -55,7 +63,7 @@ public class ProveedorDAO extends HibernateEM {
 		}
 	}
 
-	public void editarProveedor(Proveedor p, int id) {
+	public void editar(Proveedor p, int id) {
 		EntityManager em = this.getEmf().createEntityManager();
 		Proveedor pFind = em.find(Proveedor.class, id);
 		pFind.setCuit(p.getCuit());
@@ -69,5 +77,6 @@ public class ProveedorDAO extends HibernateEM {
 			em.close();
 		}
 	}
+
 	
 }

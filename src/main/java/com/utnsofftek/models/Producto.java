@@ -20,7 +20,7 @@ public class Producto extends PersistentEntity{
 	@JoinColumn(name = "id_proveedor")
 	@JsonBackReference
 	@ManyToOne(targetEntity = Proveedor.class)
-	//HACER POJO PARA PROVEEDOR
+	//TODO HACER POJO PARA PROVEEDOR
 	private Proveedor proveedor;
 	@Column(name="nombre_producto")
 	private String nombreProducto;

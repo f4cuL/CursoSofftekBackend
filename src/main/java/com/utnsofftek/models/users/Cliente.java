@@ -1,7 +1,7 @@
 package com.utnsofftek.models.users;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -15,9 +15,13 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.utnsofftek.models.Orden;
-import com.utnsofftek.models.Producto;
 import com.utnsofftek.models.enumerators.TipoCliente;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 @Entity
 @DiscriminatorValue("cliente")
 @Table(name="user_cliente")
@@ -35,7 +39,7 @@ public class Cliente extends Usuario{
 	public TipoCliente tipoCliente;
 	@JsonManagedReference
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "cliente", fetch = FetchType.EAGER)
-	List<Orden> listaOrdenes;
+	Set<Orden> listaOrdenes;
 
 	public void agregarOrden(Orden ... orden) {
 		for (Orden o : orden) {
@@ -45,46 +49,7 @@ public class Cliente extends Usuario{
 	}
 	
 	public Cliente() {
-		this.listaOrdenes=new ArrayList<Orden>();
-	}
-	
-	public String getNombre() {
-		return nombre;
-	}
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
-	public String getApellido() {
-		return apellido;
-	}
-	public void setApellido(String apellido) {
-		this.apellido = apellido;
-	}
-	public String getRazonSocial() {
-		return razonSocial;
-	}
-	public void setRazonSocial(String razonSocial) {
-		this.razonSocial = razonSocial;
-	}
-	public int getDni() {
-		return dni;
-	}
-	public void setDni(int dni) {
-		this.dni = dni;
-	}
-	public TipoCliente getTipoCliente() {
-		return tipoCliente;
-	}
-	public void setTipoCliente(TipoCliente tipoCliente) {
-		this.tipoCliente = tipoCliente;
-	}
-
-	public List<Orden> getListaOrdenes() {
-		return listaOrdenes;
-	}
-
-	public void setListaOrdenes(List<Orden> listaOrdenes) {
-		this.listaOrdenes = listaOrdenes;
+		this.listaOrdenes=new HashSet<Orden>();
 	}
 	
 	
