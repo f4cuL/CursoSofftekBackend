@@ -57,5 +57,12 @@ public class Proveedor extends PersistentEntity{
 			listaCategorias.add(c);
 		}
 	}
+	public void removerCategoria(int id) {
+		for (Categoria c : listaCategorias) {
+			if (c.getId()==id) {
+				listaCategorias.remove(c);
+			}
+		}
+	}
 	
 }

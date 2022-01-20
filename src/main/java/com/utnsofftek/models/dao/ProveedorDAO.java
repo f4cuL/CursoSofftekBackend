@@ -28,8 +28,7 @@ public class ProveedorDAO extends HibernateEM implements DAOInterface<Proveedor>
 			return null;
 		}finally {
 			em.close();
-		}
-		
+		}		
 	}
 
 	public Proveedor findById(int id) {
@@ -45,26 +44,28 @@ public class ProveedorDAO extends HibernateEM implements DAOInterface<Proveedor>
 		} finally {
 			em.close();
 		}
-		
+
 	}
+
 	public void agregar(Proveedor p) {
 		EntityManager em = this.getEmf().createEntityManager();
 		try {
 			em.getTransaction().begin();
 			em.persist(p);
 			em.getTransaction().commit();
-		}finally {
+		} finally {
 			em.close();
 		}
 
 	}
+
 	public void eliminar(int id) {
 		EntityManager em = this.getEmf().createEntityManager();
-		try{
+		try {
 			em.getTransaction().begin();
 			em.remove(em.find(Proveedor.class, id));
 			em.getTransaction().commit();
-		}finally{
+		} finally {
 			em.close();
 		}
 	}
@@ -79,9 +80,10 @@ public class ProveedorDAO extends HibernateEM implements DAOInterface<Proveedor>
 			em.getTransaction().begin();
 			em.merge(pFind);
 			em.getTransaction().commit();
-		}finally {
+		} finally {
 			em.close();
 		}
 	}
-	
 }
+
+// TODO Quitar categoria de proveedor ( SIN BORRAR CAT )

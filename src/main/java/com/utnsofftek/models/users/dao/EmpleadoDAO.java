@@ -14,16 +14,17 @@ public class EmpleadoDAO extends HibernateEM {
 	public void agregar(Empleado empleado) {
 		EntityManager em = getEmf().createEntityManager();
 		try {
-		em.getTransaction().begin();
-		em.persist(empleado);
-		em.getTransaction().commit();
-		}catch (Exception e) {
+			em.getTransaction().begin();
+			em.persist(empleado);
+			em.getTransaction().commit();
+		} catch (Exception e) {
 			System.out.println(e);
-		}finally {
+		} finally {
 			em.close();
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	public List<Empleado> findAll() {
 		EntityManager em = getEmf().createEntityManager();
 		try {
@@ -31,10 +32,9 @@ public class EmpleadoDAO extends HibernateEM {
 		} catch (Exception e) {
 			System.out.println(e);
 			return null;
-		}finally {
+		} finally {
 			em.close();
 		}
-
 	}
 }
 

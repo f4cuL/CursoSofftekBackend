@@ -67,7 +67,16 @@ public class CategoriaController {
 			System.out.println(e);
 			return false;
 		}
-		
+	}
+	@DeleteMapping("proveedor/{idProveedor}/categoria/{idCategoria}")
+	public boolean removerCategoriaAProveedor(@PathVariable int idProveedor, @PathVariable int idCategoria) {
+		try {
+			catDAO.removerCategoria(idProveedor, idCategoria);
+			return true;
+		} catch (Exception e) {
+			System.out.println(e);
+			return false;
+		}
 	}
 	
 }

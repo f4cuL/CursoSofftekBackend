@@ -26,7 +26,6 @@ public class CategoriaDAO extends HibernateEM implements DAOInterface<Categoria>
 		}
 
 	}
-
 	public void agregar(Categoria categoria) {
 		EntityManager em = getEmf().createEntityManager();
 		try {
@@ -93,5 +92,19 @@ public class CategoriaDAO extends HibernateEM implements DAOInterface<Categoria>
 			em.close();
 		}
 	}
-	
+	public void removerCategoria(int idProveedor,int idCategoria) {
+		EntityManager em = getEmf().createEntityManager();
+		try {
+			Categoria categoria = em.find(Categoria.class, idCategoria);
+			Proveedor proveedor = em.find(Proveedor.class, idProveedor);
+			proveedor.removerCategoria(categoria.getId());
+			em.getTransaction().begin();
+			em.merge(proveedor);
+			em.getTransaction().commit();
+		}catch(Exception e) {
+			System.out.println(e);
+		}finally {
+			em.close();
+		}
+	}
 }

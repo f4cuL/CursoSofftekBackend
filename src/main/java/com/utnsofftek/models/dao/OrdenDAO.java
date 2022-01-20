@@ -28,8 +28,6 @@ public class OrdenDAO extends HibernateEM {
 		}finally {
 			em.close();
 		}
-		
-	
 	}
 
 	public void agregarOrden(Orden orden) {
@@ -40,8 +38,7 @@ public class OrdenDAO extends HibernateEM {
 			em.getTransaction().commit();
 		}finally {
 			em.close();
-		}
-		
+		}	
 	}
 
 	// TODO ABM
