@@ -13,6 +13,7 @@ import com.utnsofftek.models.Proveedor;
 
 @Component
 public class CategoriaDAO extends HibernateEM implements DAOInterface<Categoria> {
+	@SuppressWarnings("unchecked")
 	public List<Categoria> findAll() {
 		EntityManager em = getEmf().createEntityManager();
 		try {

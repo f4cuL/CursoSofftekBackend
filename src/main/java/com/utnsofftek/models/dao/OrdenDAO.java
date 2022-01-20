@@ -20,6 +20,7 @@ public class OrdenDAO extends HibernateEM {
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	public List<Orden> findAll() {
 		EntityManager em = getEmf().createEntityManager();
 		try {

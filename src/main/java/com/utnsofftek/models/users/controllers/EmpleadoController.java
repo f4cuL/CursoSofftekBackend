@@ -25,11 +25,10 @@ public class EmpleadoController {
 	public boolean crearEmpleado(@RequestBody Empleado empleado) {
 		
 		try {
-			empDAO.agregarEmpleado(empleado);
+			empDAO.agregar(empleado);
 			return true;
 		} catch (Exception e) {
 			System.out.println(e);
-			empDAO.getEm().getTransaction().rollback();
 			return false;
 		}
 	}

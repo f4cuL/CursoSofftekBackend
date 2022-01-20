@@ -30,7 +30,6 @@ public class ClienteController {
 			return true;
 		} catch (Exception e) {
 			System.out.println(e);
-			cliDAO.getEm().getTransaction().rollback();
 			return false;
 		}
 	}

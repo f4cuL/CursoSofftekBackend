@@ -28,6 +28,7 @@ public class Orden extends PersistentEntity{
     private java.sql.Date fechaEntrega;
 	@Column(name="precio_total")
 	private int precioTotal;
+	//TODO TDO para Cliente
 	public Cliente getCliente() {
 		return cliente;
 	}
