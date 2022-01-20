@@ -1,8 +1,8 @@
-package com.utnsofftek.models.dao;
+package com.utnsofftek.interfaces;
 
 import java.util.List;
 
-public interface DaoInterface<T> {
+public interface DAOInterface<T> {
 	    
 	    T findById(int id);
 	    

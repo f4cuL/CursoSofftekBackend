@@ -6,12 +6,13 @@ import javax.persistence.EntityManager;
 
 import org.springframework.stereotype.Component;
 
+import com.utnsofftek.interfaces.DAOInterface;
 import com.utnsofftek.models.Categoria;
 import com.utnsofftek.models.HibernateEM;
 
 @Component
-public class CategoriaDAO extends HibernateEM{
-	public List<Categoria> findALL() {
+public class CategoriaDAO extends HibernateEM implements DAOInterface<Categoria>{
+	public List<Categoria> findAll() {
 		EntityManager em = getEmf().createEntityManager();
 		try {
 			return em.createQuery("FROM Categoria").getResultList();
@@ -21,7 +22,7 @@ public class CategoriaDAO extends HibernateEM{
 
 		
 	}
-	public void agregarCategoria(Categoria categoria) {
+	public void agregar(Categoria categoria) {
 		EntityManager em = getEmf().createEntityManager();
 		try {
 			em.getTransaction().begin();
@@ -32,6 +33,44 @@ public class CategoriaDAO extends HibernateEM{
 			em.close();
 		}
 	}
+	@Override
+	public Categoria findById(int id) {
+		EntityManager em = getEmf().createEntityManager();
+		try {
+			return em.find(Categoria.class,id);
+		}
+		finally {
+			em.close();
+		}
+	}
+	@Override
+	public void editar(Categoria t, int id) {
+		EntityManager em = getEmf().createEntityManager();
+		try {		
+			Categoria catEncontrada = em.find(Categoria.class,id);
+			catEncontrada.setNombreCategoria(t.getNombreCategoria());
+			em.getTransaction().begin();
+			em.merge(catEncontrada);
+			em.getTransaction().commit();	
+		}
+		finally {
+			em.close();
+		}
+		
+	}
+	@Override
+	public void eliminar(int id) {
+		EntityManager em = getEmf().createEntityManager();
+		try {		
+			Categoria catEncontrada = em.find(Categoria.class,id);
+			em.getTransaction().begin();
+			em.remove(catEncontrada);	
+			em.getTransaction().commit();	
+		}
+		finally {
+			em.close();
+		}
+		
+	}
 	
-	//TODO ABM
 }

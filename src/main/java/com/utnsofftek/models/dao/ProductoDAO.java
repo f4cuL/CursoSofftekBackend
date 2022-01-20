@@ -8,12 +8,13 @@ import javax.transaction.Transactional;
 import org.hibernate.Hibernate;
 import org.springframework.stereotype.Component;
 
+import com.utnsofftek.interfaces.DAOInterface;
 import com.utnsofftek.models.HibernateEM;
 import com.utnsofftek.models.Producto;
 import com.utnsofftek.models.Proveedor;
 
 @Component
-public class ProductoDAO extends HibernateEM implements DaoInterface<Producto>{
+public class ProductoDAO extends HibernateEM implements DAOInterface<Producto>{
 
 	public Producto findById(int id) {
 		EntityManager em = this.getEmf().createEntityManager();

@@ -15,6 +15,4 @@ public class Categoria extends PersistentEntity{
 		this.nombreCategoria = nombreCategoria;
 	}
 	
-	
-	
 }
