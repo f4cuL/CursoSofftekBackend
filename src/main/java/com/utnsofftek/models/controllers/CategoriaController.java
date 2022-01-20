@@ -58,5 +58,16 @@ public class CategoriaController {
 			return false;
 		}
 	}
+	@PostMapping("proveedor/{idProveedor}/categoria/{idCategoria}")
+	public boolean agregarCategoriaAProveedor(@PathVariable int idProveedor, @PathVariable int idCategoria) {
+		try {
+			catDAO.agregarCategoria(idProveedor, idCategoria);
+			return true;
+		} catch (Exception e) {
+			System.out.println(e);
+			return false;
+		}
+		
+	}
 	
 }

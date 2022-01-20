@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 import com.utnsofftek.interfaces.DAOInterface;
 import com.utnsofftek.models.Categoria;
 import com.utnsofftek.models.HibernateEM;
+import com.utnsofftek.models.Proveedor;
 
 @Component
 public class CategoriaDAO extends HibernateEM implements DAOInterface<Categoria> {
@@ -61,7 +62,6 @@ public class CategoriaDAO extends HibernateEM implements DAOInterface<Categoria>
 		} finally {
 			em.close();
 		}
-
 	}
 	@Override
 	public void eliminar(int id) {
@@ -75,7 +75,22 @@ public class CategoriaDAO extends HibernateEM implements DAOInterface<Categoria>
 		finally {
 			em.close();
 		}
-		
+	}
+	public void agregarCategoria(int idProveedor,int idCategoria) {
+		EntityManager em = getEmf().createEntityManager();
+		try {
+			Categoria categoria = em.find(Categoria.class, idCategoria);
+			Proveedor proveedor = em.find(Proveedor.class, idProveedor);
+			proveedor.agregarCategoria(categoria);
+			em.getTransaction().begin();
+			em.merge(proveedor);
+			em.getTransaction().commit();
+			
+		}catch(Exception e) {
+			System.out.println(e);
+		}finally {
+			em.close();
+		}
 	}
 	
 }
