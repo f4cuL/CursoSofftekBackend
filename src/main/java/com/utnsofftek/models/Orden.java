@@ -8,6 +8,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.utnsofftek.PersistentEntity;
 import com.utnsofftek.models.users.Cliente;
 import com.utnsofftek.models.users.Empleado;
 

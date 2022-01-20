@@ -7,8 +7,8 @@ import javax.persistence.EntityManager;
 import org.hibernate.Hibernate;
 import org.springframework.stereotype.Component;
 
+import com.utnsofftek.HibernateEM;
 import com.utnsofftek.interfaces.DAOInterface;
-import com.utnsofftek.models.HibernateEM;
 import com.utnsofftek.models.Proveedor;
 
 @Component
@@ -86,4 +86,3 @@ public class ProveedorDAO extends HibernateEM implements DAOInterface<Proveedor>
 	}
 }
 
-// TODO Quitar categoria de proveedor ( SIN BORRAR CAT )

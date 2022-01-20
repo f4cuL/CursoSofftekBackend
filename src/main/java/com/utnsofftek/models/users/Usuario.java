@@ -7,7 +7,7 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.Table;
 
-import com.utnsofftek.models.PersistentEntity;
+import com.utnsofftek.PersistentEntity;
 
 import lombok.Getter;
 import lombok.Setter;

@@ -7,6 +7,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.utnsofftek.PersistentEntity;
 
 import lombok.Getter;
 import lombok.Setter;

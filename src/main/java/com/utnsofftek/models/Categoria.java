@@ -3,6 +3,8 @@ package com.utnsofftek.models;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 
+import com.utnsofftek.PersistentEntity;
+
 import lombok.Getter;
 import lombok.Setter;
 

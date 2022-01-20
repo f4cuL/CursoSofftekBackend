@@ -1,4 +1,4 @@
-package com.utnsofftek.models;
+package com.utnsofftek;
 
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;

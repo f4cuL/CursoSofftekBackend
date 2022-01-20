@@ -15,6 +15,7 @@ import javax.persistence.Table;
 import javax.transaction.Transactional;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.utnsofftek.PersistentEntity;
 
 import lombok.Getter;
 import lombok.Setter;

@@ -6,9 +6,9 @@ import javax.persistence.EntityManager;
 
 import org.springframework.stereotype.Component;
 
+import com.utnsofftek.HibernateEM;
 import com.utnsofftek.interfaces.DAOInterface;
 import com.utnsofftek.models.Categoria;
-import com.utnsofftek.models.HibernateEM;
 import com.utnsofftek.models.Proveedor;
 
 @Component

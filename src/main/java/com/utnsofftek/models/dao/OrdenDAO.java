@@ -6,11 +6,12 @@ import javax.persistence.EntityManager;
 
 import org.springframework.stereotype.Component;
 
-import com.utnsofftek.models.HibernateEM;
+import com.utnsofftek.HibernateEM;
+import com.utnsofftek.interfaces.DAOInterface;
 import com.utnsofftek.models.Orden;
 
 @Component
-public class OrdenDAO extends HibernateEM {
+public class OrdenDAO extends HibernateEM implements DAOInterface<Orden> {
 	public Orden findById(int id) {
 		EntityManager em = getEmf().createEntityManager();
 		try{
@@ -19,7 +20,6 @@ public class OrdenDAO extends HibernateEM {
 			em.close();
 		}
 	}
-
 	@SuppressWarnings("unchecked")
 	public List<Orden> findAll() {
 		EntityManager em = getEmf().createEntityManager();
@@ -41,5 +41,23 @@ public class OrdenDAO extends HibernateEM {
 		}	
 	}
 
-	// TODO ABM
+	@Override
+	public void agregar(Orden t) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void editar(Orden t, int id) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void eliminar(int id) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	// TODO Terminar Ordend espues de Detalle_orden
 }
