@@ -14,13 +14,16 @@ import com.utnsofftek.models.Producto;
 import com.utnsofftek.models.Proveedor;
 
 @Component
-public class ProductoDAO extends HibernateEM implements DAOInterface<Producto>{
+public class ProductoDAO extends HibernateEM implements DAOInterface<Producto> {
 
 	public Producto findById(int id) {
 		EntityManager em = this.getEmf().createEntityManager();
-		try{
+		try {
 			return em.find(Producto.class, id);
-		}finally {
+		} catch (Exception e) {
+			System.out.println("e");
+			return null;
+		} finally {
 			em.close();
 		}
 	}
@@ -30,7 +33,10 @@ public class ProductoDAO extends HibernateEM implements DAOInterface<Producto>{
 		EntityManager em = this.getEmf().createEntityManager();
 		try {
 			return em.createQuery("FROM Producto").getResultList();
-		}finally {
+		} catch (Exception e) {
+			System.out.println("e");
+			return null;
+		} finally {
 			em.close();
 		}
 	}

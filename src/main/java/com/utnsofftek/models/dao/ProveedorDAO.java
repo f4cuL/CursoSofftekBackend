@@ -23,11 +23,15 @@ public class ProveedorDAO extends HibernateEM implements DAOInterface<Proveedor>
 				Hibernate.initialize(p.getListaProductos());
 			}
 			return listaObtenida;
-		} finally {
+		}catch (Exception e) {
+			System.out.println("e");
+			return null;
+		}finally {
 			em.close();
 		}
 		
 	}
+
 	public Proveedor findById(int id) {
 		EntityManager em = this.getEmf().createEntityManager();
 		try {
@@ -35,7 +39,10 @@ public class ProveedorDAO extends HibernateEM implements DAOInterface<Proveedor>
 			Hibernate.initialize(p.getListaProductos());
 			Hibernate.initialize(p.getListaCategorias());
 			return p;
-		}finally {
+		} catch (Exception e) {
+			System.out.println("e");
+			return null;
+		} finally {
 			em.close();
 		}
 		
