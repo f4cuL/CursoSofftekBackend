@@ -13,7 +13,7 @@ import com.utnsofftek.models.Producto;
 import com.utnsofftek.models.Proveedor;
 
 @Component
-public class ProductoDAO extends HibernateEM {
+public class ProductoDAO extends HibernateEM implements DaoInterface<Producto>{
 
 	public Producto findById(int id) {
 		EntityManager em = this.getEmf().createEntityManager();
@@ -34,7 +34,7 @@ public class ProductoDAO extends HibernateEM {
 		}
 	}
 
-	public void agregarProducto(int id, Producto p) {
+	public void agregarProductoProveedor(int id, Producto p) {
 		EntityManager em = this.getEmf().createEntityManager();
 		Proveedor proveedor = em.find(Proveedor.class, id);
 		try {
@@ -45,33 +45,38 @@ public class ProductoDAO extends HibernateEM {
 		}finally {
 			em.close();
 		}
-	
 
 	}
 
-	public void modificarProducto(int id, Producto p) {
+	public void editar(Producto p, int id) {
 		EntityManager em = this.getEmf().createEntityManager();
 		Producto pFind = em.find(Producto.class, id);
 		try {
 			em.getTransaction().begin();
 			pFind.setNombreProducto(p.getNombreProducto());
 			pFind.setPrecioProducto(p.getPrecioProducto());
+			em.getTransaction().commit();
 		}finally {
 			em.close();
 		}
 
 	}
 
-	public void borrarProducto(int id) {
+	public void eliminar(int id) {
 		EntityManager em = this.getEmf().createEntityManager();
 		try {
 			em.getTransaction().begin();
-			em.remove(findById(id));
+			em.remove(em.find(Producto.class, id));
 			em.getTransaction().commit();
 		} finally {
 			em.close();
 		}
 	
+	}
+
+	@Override
+	public void agregar(Producto t) {		
+		//No lo voy a usar ya que no tiene sentido agregar un producto si no es a un Proveedor
 	}
 
 }

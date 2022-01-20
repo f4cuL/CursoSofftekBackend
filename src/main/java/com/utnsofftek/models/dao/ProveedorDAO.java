@@ -75,6 +75,5 @@ public class ProveedorDAO extends HibernateEM implements DaoInterface<Proveedor>
 			em.close();
 		}
 	}
-	//TODO Agregar categorias
 	
 }

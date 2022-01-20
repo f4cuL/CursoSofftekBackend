@@ -27,7 +27,7 @@ public class ProductoController {
 	public boolean modificarProducto(@PathVariable int id, @RequestBody Producto p)
 	{
 		try {
-			pDAO.modificarProducto(id, p);
+			pDAO.editar(p,id);
 			return true;
 		} catch (Exception e) {
 			return false;
@@ -37,7 +37,7 @@ public class ProductoController {
 	public boolean insertarProducto(@PathVariable("id")int idProveedor,@RequestBody Producto p)
 	{
 		try {
-			pDAO.agregarProducto(idProveedor, p);
+			pDAO.agregarProductoProveedor(idProveedor, p);
 			return true;
 		} catch (Exception e) {
 			return false;
@@ -46,7 +46,7 @@ public class ProductoController {
 	@DeleteMapping("/producto/{id}")
 	public boolean borrarProducto(@PathVariable("id") int id) {
 		try {
-			pDAO.borrarProducto(id);
+			pDAO.eliminar(id);
 			return true;
 		} catch (Exception e) {
 			return false;
