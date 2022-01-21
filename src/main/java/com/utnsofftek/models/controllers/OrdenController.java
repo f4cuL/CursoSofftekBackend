@@ -24,14 +24,4 @@ public class OrdenController {
 	public List<Orden> traerOrdenes() {
 		return oDAO.findAll();
 	}
-	@PostMapping("/orden")
-	public boolean agregarOrden(@RequestBody Orden orden){
-		try {
-			oDAO.agregarOrden(orden);
-			return true;
-		} catch (Exception e) {
-			System.out.println(e);
-			return false;
-		}
-	}
 }

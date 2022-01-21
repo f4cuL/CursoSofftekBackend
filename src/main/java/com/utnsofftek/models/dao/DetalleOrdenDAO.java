@@ -43,9 +43,7 @@ public class DetalleOrdenDAO extends HibernateEM{
 			DetalleOrden detalleOrden = new DetalleOrden();
 			DetalleOrdenKey detalleOrdenKey = new DetalleOrdenKey();
 			detalleOrdenKey.setIdOrden(idOrden);
-			System.out.println(idOrden);
 			detalleOrdenKey.setIdProducto(idProducto);
-			System.out.println(idProducto);
 			detalleOrden.setId(detalleOrdenKey);
 			detalleOrden.setCantidad(cantidad);
 			detalleOrden.setOrden(em.find(Orden.class, idOrden));

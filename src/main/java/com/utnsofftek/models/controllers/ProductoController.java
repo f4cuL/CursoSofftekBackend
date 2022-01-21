@@ -53,7 +53,7 @@ public class ProductoController {
 		}
 	
 	}
-	@GetMapping("/productos")
+	@GetMapping("/producto")
 	public List<Producto> traerProductos()
 	{
 		return pDAO.findAll();	

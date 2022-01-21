@@ -28,7 +28,6 @@ public class DetalleOrden{
 	@ManyToOne(targetEntity = Orden.class, cascade = CascadeType.ALL)
 	private Orden orden;
 	@MapsId("idProducto")
-	@JsonIgnore
 	@JoinColumn(name="id_producto")
 	@ManyToOne(targetEntity = Producto.class, cascade = CascadeType.ALL)
 	private Producto producto;

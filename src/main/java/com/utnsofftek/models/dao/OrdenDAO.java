@@ -31,14 +31,7 @@ public class OrdenDAO extends HibernateEM implements DAOInterface<Orden> {
 	}
 
 	public void agregarOrden(Orden orden) {
-		EntityManager em = getEmf().createEntityManager();
-		try {
-			em.getTransaction().begin();
-			em.persist(orden);
-			em.getTransaction().commit();
-		}finally {
-			em.close();
-		}	
+		
 	}
 
 	@Override

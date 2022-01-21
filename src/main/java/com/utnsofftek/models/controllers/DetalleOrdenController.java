@@ -18,13 +18,11 @@ public class DetalleOrdenController {
 	@Autowired
 	DetalleOrdenDAO dODAO;
 	@PostMapping("/orden/{idOrden}/detalle/producto/{idProducto}/{cantidad}")
-	public boolean agregarDetalleOrden(@PathVariable int idOrden, @PathVariable int idProducto, @PathVariable int cantidad){
+	public void agregarDetalleOrden(@PathVariable int idOrden, @PathVariable int idProducto, @PathVariable int cantidad){
 		try {
 			dODAO.agregarProducto(idProducto, idOrden, cantidad);
-			return true;
 		}catch (Exception e) {
 			System.out.println(e);
-			return false;
 		}
 	}
 	@GetMapping("/orden/detalle")
