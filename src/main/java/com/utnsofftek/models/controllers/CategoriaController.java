@@ -2,6 +2,8 @@ package com.utnsofftek.models.controllers;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,7 +22,7 @@ public class CategoriaController {
 	@Autowired
 	CategoriaDAO catDAO;
 	@PostMapping("/categoria")
-	public boolean agregarCategoria(@RequestBody Categoria categoria) {
+	public boolean agregarCategoria(@Valid @RequestBody Categoria categoria) {
 		try {
 			catDAO.agregar(categoria);
 			return true;
@@ -49,7 +51,7 @@ public class CategoriaController {
 		}
 	}
 	@PutMapping("/categoria/{id}")
-	public boolean editarCategoria(@PathVariable int id, @RequestBody Categoria p) {
+	public boolean editarCategoria(@PathVariable int id, @Valid @RequestBody Categoria p) {
 		try {
 			catDAO.editar(p,id);
 			return true;

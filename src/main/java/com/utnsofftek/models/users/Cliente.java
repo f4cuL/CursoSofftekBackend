@@ -27,16 +27,16 @@ import lombok.Setter;
 @Table(name="user_cliente")
 public class Cliente extends Usuario{
 	@Column
-	public String nombre;
+	private String nombre;
 	@Column
-	public String apellido;
+	private String apellido;
 	@Column(name="razon_social")
-	public String razonSocial;
+	private String razonSocial;
 	@Column
-	public int dni;
+	private int dni;
 	@Enumerated(EnumType.STRING)
 	@Column(name="tipo_cliente")
-	public TipoCliente tipoCliente;
+	private TipoCliente tipoCliente;
 	@JsonManagedReference
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "cliente", fetch = FetchType.EAGER)
 	Set<Orden> listaOrdenes;

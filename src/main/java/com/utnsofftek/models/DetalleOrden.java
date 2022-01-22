@@ -9,7 +9,6 @@ import javax.persistence.MapsId;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.utnsofftek.PersistentEntity;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -19,6 +18,7 @@ import lombok.Setter;
 @Entity
 @Table(name = "detalle_orden")
 public class DetalleOrden{
+	
 	@EmbeddedId
     DetalleOrdenKey id;
 	

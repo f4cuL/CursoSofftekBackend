@@ -2,6 +2,8 @@ package com.utnsofftek.models.controllers;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,17 +33,8 @@ public class ProveedorController{
 	}
 
 	@PostMapping("/proveedor")
-	public boolean agregarProveedor(@RequestBody Proveedor p) {
-		try {
-			if(p.getCuit()!=0) {
-			provDAO.agregar(p);
-			return true;
-			}
-		} catch (Exception e) {
-			System.out.println(e);
-			return false;
-		}
-		return false;
+	public void agregarProveedor(@Valid @RequestBody Proveedor p) {
+		provDAO.agregar(p);
 	}
 
 	@DeleteMapping("/proveedor/{id}")
@@ -55,14 +48,8 @@ public class ProveedorController{
 		}
 	}
 	@PutMapping("/proveedor/{id}")
-	public boolean modificarProveedor(@RequestBody Proveedor p, @PathVariable int id) {
-		try {
+	public void modificarProveedor(@Valid @RequestBody Proveedor p, @PathVariable int id) {
 			provDAO.editar(p,id);
-			return true;
-		} catch (Exception e) {
-			System.out.println(e);
-			return false;
-		}
 	}
 
 }

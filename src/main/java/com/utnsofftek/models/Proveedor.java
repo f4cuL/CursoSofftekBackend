@@ -1,4 +1,4 @@
-	package com.utnsofftek.models;
+package com.utnsofftek.models;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -12,7 +12,10 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.transaction.Transactional;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.utnsofftek.PersistentEntity;
@@ -24,7 +27,6 @@ import lombok.Setter;
 @Getter
 @Setter
 @Table(name = "proovedor")
-@Transactional
 public class Proveedor extends PersistentEntity{
 	
 	public Proveedor() {
@@ -32,14 +34,22 @@ public class Proveedor extends PersistentEntity{
 	}
 
 	@Column
+	@NotBlank
 	private String nombre;
+	
 	@JsonManagedReference
 	@OneToMany(mappedBy = "proveedor", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private Set<Producto> listaProductos;
-	@Column(nullable = false)
+	
+	@Column
+	@NotBlank
 	private String direccion;
-	@Column(nullable = false)
+	
+	
+	@Column
+	@Min(10000000)
 	private int cuit;
+	
 	@ManyToMany(cascade = { CascadeType.ALL }, fetch = FetchType.LAZY)
 	@JoinTable(
 			name = "proveedor_categoria", joinColumns = {
