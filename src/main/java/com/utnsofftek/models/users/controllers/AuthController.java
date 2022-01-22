@@ -3,7 +3,7 @@ package com.utnsofftek.models.users.controllers;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -15,13 +15,16 @@ public class AuthController{
 	@Autowired
 	UsuarioDAO usDAO;
 	
-	@GetMapping("/login")
-	public boolean verifyLogin(@Valid @RequestBody Usuario u) {
+	@PostMapping("/usuario/login")
+	public Usuario verifyLogin(@Valid @RequestBody Usuario u) {
 		Usuario usuario = usDAO.iniciarSesion(u);
 		if (usuario ==null) {
-			return false;
+			Usuario us = new Usuario();
+			us.setNombreUsuario("ERROR");
+			us.setPassword("ERROR");
+			return us;
 		}
-		return true;
+		return usuario;
 	}
 }
 

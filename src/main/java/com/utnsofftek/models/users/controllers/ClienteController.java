@@ -24,7 +24,7 @@ public class ClienteController {
 	public List<Cliente> findAllUsers(){
 		return cliDAO.findAllClientes();
 	}
-	@PostMapping("/usuario/cliente")
+	@PostMapping("/usuario/registrar")
 	public boolean agregarUsuario(@Valid @RequestBody Cliente u) {
 		Hash hash = Password.hash(u.getPassword()).withBCrypt();
 		u.setPassword(hash.getResult());

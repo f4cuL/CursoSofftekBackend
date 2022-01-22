@@ -12,9 +12,9 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -47,8 +47,8 @@ public class Proveedor extends PersistentEntity{
 	
 	
 	@Column
-	@Min(10000000)
-	private int cuit;
+	@Size(min = 11, max=11)
+	private String cuit;
 	
 	@ManyToMany(cascade = { CascadeType.ALL }, fetch = FetchType.LAZY)
 	@JoinTable(
