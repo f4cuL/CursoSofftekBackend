@@ -12,6 +12,11 @@ import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Positive;
+
+import org.hibernate.validator.constraints.Range;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.utnsofftek.models.Orden;
@@ -27,16 +32,26 @@ import lombok.Setter;
 @Table(name="user_cliente")
 public class Cliente extends Usuario{
 	@Column
+	@NotBlank
 	private String nombre;
+	
 	@Column
+	@NotBlank
 	private String apellido;
+	
 	@Column(name="razon_social")
+	@NotBlank
 	private String razonSocial;
+	
 	@Column
+	@Positive
+	@Range(min = 10000000, max = 99999999)
 	private int dni;
+	
 	@Enumerated(EnumType.STRING)
 	@Column(name="tipo_cliente")
 	private TipoCliente tipoCliente;
+	
 	@JsonManagedReference
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "cliente", fetch = FetchType.EAGER)
 	Set<Orden> listaOrdenes;

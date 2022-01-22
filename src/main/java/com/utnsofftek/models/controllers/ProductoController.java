@@ -2,6 +2,8 @@ package com.utnsofftek.models.controllers;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,7 +26,7 @@ public class ProductoController {
 		return pDAO.findById(id);	
 	}
 	@PutMapping("/producto/{id}")
-	public boolean modificarProducto(@PathVariable int id, @RequestBody Producto p)
+	public boolean modificarProducto(@PathVariable int id,@Valid @RequestBody Producto p)
 	{
 		try {
 			pDAO.editar(p,id);
@@ -34,7 +36,7 @@ public class ProductoController {
 		}
 	}
 	@PostMapping("/proveedor/{id}/producto")
-	public boolean insertarProducto(@PathVariable("id")int idProveedor,@RequestBody Producto p)
+	public boolean insertarProducto(@PathVariable("id")int idProveedor,@Valid @RequestBody Producto p)
 	{
 		try {
 			pDAO.agregarProductoProveedor(idProveedor, p);
