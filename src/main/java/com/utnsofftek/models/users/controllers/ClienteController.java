@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.password4j.Hash;
 import com.password4j.Password;
 import com.utnsofftek.models.users.Cliente;
+import com.utnsofftek.models.users.Usuario;
 import com.utnsofftek.models.users.dao.ClienteDAO;
 
 @RestController

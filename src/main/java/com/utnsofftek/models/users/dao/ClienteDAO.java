@@ -22,9 +22,7 @@ public class ClienteDAO extends HibernateEM {
 			return null;
 		}finally {
 			em.close();
-		}
-
-		
+		}	
 	}
 	public void generarUsuario(Cliente u){
 		EntityManager em = getEmf().createEntityManager();
